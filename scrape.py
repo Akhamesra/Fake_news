@@ -15,6 +15,3 @@ def c(link):
     for data in soup.find_all("p"): 
         fdata = fdata +" "+ data.get_text()
     return fdata
-
-
-#c("https://www.indiatoday.in/technology/news/story/disha-ravi-arrest-puts-privacy-of-all-google-india-users-in-doubt-1769772-2021-02-16")

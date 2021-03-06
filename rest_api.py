@@ -28,34 +28,14 @@ def wordopt(text):
     text = re.sub('\n', '', text)
     text = re.sub('\w*\d\w*', '', text)    
     return text
-def getfakeness(num):
-  num = num * 100
-  if(num > 90):
-    return 'Real'
-  elif(num > 75):
-    return 'Mostly Real'
-  elif(num > 50):
-    return 'May be Real'
-  elif(num > 40):
-    return 'Mostly Fake'
-  else:
-    return 'Fake'
-
-app = Flask(__name__)
-
-@app.route("/predict",methods = ['POST'])
-def predict():
-    data = request.json
-    link = data["link"]
-    test = c(link)
-    test_x = wordopt(test)
-    tfidf_x = vectorizer.transform([test_x])
-    pred = model.predict(tfidf_x)
-    result = math.ceil(model._predict_proba_lr(tfidf_x)[0][1]*100)
-    output = {'results': result}
-    #print(getfakeness(model._predict_proba_lr(tfidf_x)[0][1]))
-    return jsonify(results=output)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+link = input("")
+test = c(link)
+test_x = wordopt(test)
+tfidf_x = vectorizer.transform([test_x])
+pred = model.predict(tfidf_x)
+result = math.ceil(model._predict_proba_lr(tfidf_x)[0][1]*100)
+print(result,"% True.")
+    
